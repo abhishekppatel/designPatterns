@@ -1,7 +1,7 @@
-add_executable(main main.cpp)
+add_executable(duckSimulator main.cpp)
 
 # Link against the libraries
-target_link_libraries(main 
+target_link_libraries(duckSimulator 
   PRIVATE 
     ducks
     fly
