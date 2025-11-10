@@ -8,4 +8,7 @@ PUBLIC
    ${CMAKE_CURRENT_SOURCE_DIR}/../inc
 )
 
-target_link_libraries(displays PRIVATE observerInterface)
+target_link_libraries(displays 
+   PRIVATE 
+      observerInterface 
+      weatherData)

@@ -3,11 +3,37 @@
  */
 
 #include "StatisticsDisplay.hpp"
+#include <iomanip>
 #include <iostream>
 
-void StatisticsDisplay::update(float temperature, float humidity, float pressure) {}
+StatisticsDisplay::StatisticsDisplay(WeatherData &weatherData) : mWeatherData(weatherData)
+{
+    mWeatherData.registerObserver(this);
+}
+
+void StatisticsDisplay::update()
+{
+    auto temperature{mWeatherData.getTemperature()};
+    mTemperatureSum += temperature;
+
+    mTotalReadings++;
+
+    if (temperature > mMaximumTemperature)
+    {
+        mMaximumTemperature = temperature;
+    }
+
+    if (temperature < mMinumumTemperature)
+    {
+        mMinumumTemperature = temperature;
+    }
+
+    display();
+}
 
 void StatisticsDisplay::display()
 {
-    std::cout << "StatisticsDisplay" << std::endl;
+    std::cout << std::fixed << std::setprecision(1)
+              << "Avg/Max/Min temperature = " << (mTemperatureSum / mTotalReadings) << "/" << mMaximumTemperature << "/"
+              << mMinumumTemperature << std::endl;
 }

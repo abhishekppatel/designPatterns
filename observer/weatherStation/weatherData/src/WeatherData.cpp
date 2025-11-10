@@ -3,10 +3,26 @@
  */
 
 #include "WeatherData.hpp"
+#include <cassert>
 
-void WeatherData::registerObserver(IObserver observer) {}
-void WeatherData::removeObserver(IObserver observer) {}
-void WeatherData::notifyObserver() {}
+void WeatherData::registerObserver(IObserver *observer)
+{
+    mObservers.push_back(observer);
+}
+
+void WeatherData::removeObserver(IObserver *observer)
+{
+    mObservers.remove(observer);
+}
+
+void WeatherData::notifyObserver()
+{
+    for (auto observer: mObservers)
+    {
+        assert(observer != nullptr);
+        observer->update();
+    }
+}
 
 float WeatherData::getTemperature()
 {

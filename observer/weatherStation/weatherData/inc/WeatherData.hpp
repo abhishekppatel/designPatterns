@@ -7,12 +7,14 @@
 
 #include "IObserver.hpp"
 #include "ISubject.hpp"
+#include <list>
+#include <memory>
 
 class WeatherData : public ISubject
 {
 public:
-    void registerObserver(IObserver observer) override;
-    void removeObserver(IObserver observer) override;
+    void registerObserver(IObserver *observer) override;
+    void removeObserver(IObserver *observer) override;
     void notifyObserver() override;
 
     float getTemperature();
@@ -24,6 +26,8 @@ public:
     void setMeasurements(float temperature, float humidity, float pressure);
 
 private:
+    std::list<IObserver *> mObservers;
+
     float mTemperature{};
     float mHumidity{};
     float mPressure{};

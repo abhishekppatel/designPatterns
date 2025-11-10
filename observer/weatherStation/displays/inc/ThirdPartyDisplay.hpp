@@ -7,12 +7,19 @@
 
 #include "IDisplayElement.hpp"
 #include "IObserver.hpp"
+#include "WeatherData.hpp"
 
 class ThirdPartyDisplay final : public IObserver, public IDisplayElement
 {
 public:
-    void update(float temperature, float humidity, float pressure) override;
+    ThirdPartyDisplay(WeatherData &weatherData);
+    ~ThirdPartyDisplay();
+
+    void update() override;
     void display() override;
+
+private:
+    WeatherData &mWeatherData;
 };
 
 #endif  // THIRD_PARTY_DISPLAY_HPP

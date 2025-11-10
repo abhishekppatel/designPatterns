@@ -5,7 +5,12 @@
 #include "ThirdPartyDisplay.hpp"
 #include <iostream>
 
-void ThirdPartyDisplay::update(float temperature, float humidity, float pressure) {}
+ThirdPartyDisplay::ThirdPartyDisplay(WeatherData &weatherData) : mWeatherData(weatherData) {}
+
+void ThirdPartyDisplay::update()
+{
+    display();
+}
 
 void ThirdPartyDisplay::display()
 {
